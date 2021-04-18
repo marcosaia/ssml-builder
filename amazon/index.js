@@ -1,3 +1,5 @@
 'use strict';
 
-module.exports = require('../amazon_speech');
+const AmazonSpeech = require('../amazon_speech');
+
+module.exports = AmazonSpeech;
