@@ -7,10 +7,17 @@ var AmazonSpeech = function () {
 
 AmazonSpeech.prototype = Object.create(Speech.prototype);
 
-AmazonSpeech.prototype.whisper = function (words) {
+AmazonSpeech.prototype.whisper = function (words, shouldEscape=true) {
     this._notEmpty(words,"The words provided to AmazonSpeech#whisper(..) was '" + words + "'");
-    var escapedWords = this._escape(words);
+    var escapedWords = shouldEscape ? this._escape(words) : words
     this._elements.push("<amazon:effect name=\"whispered\">" + escapedWords + "</amazon:effect>");
+    return this;
+};
+
+AmazonSpeech.prototype.voice = function(voiceName, words, shouldEscape=true) {
+    this._notEmpty(words, "The words provided to AmazonSpeech#voice(..) was '" + words + "'");
+    var escapedWords = shouldEscape ? this._escape(words) : words
+    this._elements.push("<voice name='" + voiceName + "'>" + escapedWords + "</voice>");
     return this;
 };
 
